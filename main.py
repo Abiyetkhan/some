@@ -1,4 +1,4 @@
-from telegram import Update, InputFile from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ConversationHandler import os
+import os from telegram import Update, InputFile from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ConversationHandler
 
 Conversation states
 
@@ -41,7 +41,10 @@ for i in range(file_count):
 
 return ConversationHandler.END
 
-def main(): updater = Updater("7485450093:AAH5hJMgpZbLlGPqtQmetBgULl3zeoxSXV8", use_context=True) dp = updater.dispatcher
+def main(): BOT_TOKEN = os.getenv("7485450093:AAH5hJMgpZbLlGPqtQmetBgULl3zeoxSXV8") if not BOT_TOKEN: raise ValueError("BOT_TOKEN is not set!")
+
+updater = Updater(BOT_TOKEN, use_context=True)
+dp = updater.dispatcher
 
 conv_handler = ConversationHandler(
     entry_points=[CommandHandler('start', start)],
